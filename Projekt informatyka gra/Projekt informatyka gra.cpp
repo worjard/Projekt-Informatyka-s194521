@@ -163,7 +163,7 @@ int main()
             view.setCenter(4800, p1.getPosition().y);
         }
         if (1610 > p1.getPosition().y && p1.getPosition().y > 540 && 960 >= p1.getPosition().x) {
-            view.setCenter(4800, p1.getPosition().y);
+            view.setCenter(960, p1.getPosition().y);
         }
 
         window.setView(view);
