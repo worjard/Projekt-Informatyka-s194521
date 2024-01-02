@@ -1,4 +1,4 @@
-﻿#include <SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
 using namespace std;
@@ -27,7 +27,7 @@ postac::postac(float x_in, float y_in)
 {
     position.x = x_in;
     position.y = y_in;
-    texture.loadFromFile("C:\\Users\\worjard\\Documents\\Projekt informatyka gra\\NPC.png");
+    texture.loadFromFile("C:\\Users\\worjard\\Documents\\projektinformatykagra\\NPC.png");
     bohater.setTexture(texture);
     bohater.setTextureRect(IntRect(0, 0, 32, 64));
     bohater.setPosition(position);
@@ -67,7 +67,7 @@ int main()
     Clock zegar;
     Vector2f pozycja;
     for (int i = 0; i < 6; i++) {
-        if (!backgroundTextures[i].loadFromFile("C:\\Users\\worjard\\Documents\\Projekt informatyka gra\\lawa" + to_string(i + 1) + ".png")) {
+        if (!backgroundTextures[i].loadFromFile("C:\\Users\\worjard\\Documents\\projektinformatykagra\\lawa" + to_string(i + 1) + ".png")) {
             cerr << "Błąd ładowania tła " << i + 1 << "!" << endl;
             return 1;
         }
@@ -83,8 +83,8 @@ int main()
             backgroundSprites[i].setPosition((i - 3) * window.getSize().x, window.getSize().y);
         }
     }
-    postac p1(400, 300);
-    postac p2(100, 100);
+    postac p1(2000, 600);
+    postac p2(1900, 500);
     view.setSize(1920, 1080);
     view.setCenter(p1.getPosition());
     window.setView(view);
@@ -130,25 +130,45 @@ int main()
             }
         }
 
-
         if (zegar.getElapsedTime().asMilliseconds() > 50.0f) {
-            if (dx > 0)
-                p2.animujChodzenie(1);
-            else
+            if (p2.getPosition().x > p1.getPosition().x) {
+                dx = -2;
                 p2.animujChodzenie(3);
-            if (p2.getPosition().x > window.getSize().x || p2.getPosition().x < 0)
-                dx = -dx;
-            if (dy > 0)
-                p2.animujChodzenie(2);
-            else
+            }
+            else {
+                dx = 2;
+                p2.animujChodzenie(1);
+            }
+            if (p2.getPosition().y > p1.getPosition().y) {
+                dy = -2;
                 p2.animujChodzenie(0);
-            if (p2.getPosition().y > window.getSize().y || p2.getPosition().y < 0)
-                dy = -dy;
+            }
+            else {
+                dy = 2;
+                p2.animujChodzenie(2);
+            }
             p2.przesun(dx, dy);
             zegar.restart();
         }
-        view.setCenter(p1.getPosition());
+        if (1610 > p1.getPosition().y && p1.getPosition().y > 540 && 4800 > p1.getPosition().x && p1.getPosition().x > 960) {
+            view.setCenter(p1.getPosition());
+        }
+        if (540 >= p1.getPosition().y && 4800 > p1.getPosition().x && p1.getPosition().x > 960) {
+            view.setCenter(p1.getPosition().x, 540);
+        }
+        if (p1.getPosition().y >= 1610 && 4800 > p1.getPosition().x && p1.getPosition().x > 960) {
+            view.setCenter(p1.getPosition().x, 1610);
+        }
+        if (1610 > p1.getPosition().y && p1.getPosition().y > 540 && p1.getPosition().x >= 4800) {
+            view.setCenter(4800, p1.getPosition().y);
+        }
+        if (1610 > p1.getPosition().y && p1.getPosition().y > 540 && 960 >= p1.getPosition().x) {
+            view.setCenter(4800, p1.getPosition().y);
+        }
+
         window.setView(view);
+        //1610>y>540
+        //4800>x>960
         window.clear();
         for (int i = 0; i < 6; i++) {
             window.draw(backgroundSprites[i]);
