@@ -1,24 +1,17 @@
-﻿  Projekt informatyka gra.cpp
-C:\Users\worjard\Documents\Projekt informatyka gra\Projekt informatyka gra\Projekt informatyka gra.cpp(79,48): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
+﻿  Menu.cpp
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Menu.cpp(13,77): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
           with
           [
               T=unsigned int
           ]
-C:\Users\worjard\Documents\Projekt informatyka gra\Projekt informatyka gra\Projekt informatyka gra.cpp(83,92): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Menu.cpp(13,38): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
           with
           [
               T=unsigned int
           ]
-C:\Users\worjard\Documents\Projekt informatyka gra\Projekt informatyka gra\Projekt informatyka gra.cpp(83,54): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
-          with
-          [
-              T=unsigned int
-          ]
-C:\Users\worjard\Documents\Projekt informatyka gra\Projekt informatyka gra\Projekt informatyka gra.cpp(147,28): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\worjard\Documents\Projekt informatyka gra\Projekt informatyka gra\Projekt informatyka gra.cpp(147,24): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
   Trwa generowanie kodu
-  0 of 159 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  1 of 182 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Zakończono generowanie kodu
-  Projekt informatyka gra.vcxproj -> C:\Users\worjard\Documents\Projekt informatyka gra\x64\Release\Projekt informatyka gra.exe
+  Projekt informatyka gra.vcxproj -> C:\Users\worjard\Documents\Projektinformatykagra\x64\Release\Projekt informatyka gra.exe
