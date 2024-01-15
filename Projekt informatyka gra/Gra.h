@@ -12,8 +12,8 @@ class postac {
 protected:
     Vector2f position;
     Sprite bohater;
-    Texture texture;
-    Texture wróg;
+    Texture chodzenie;
+    Texture œmieræ;
     int animFrame;
     Clock animClock;
     int col;
@@ -38,6 +38,9 @@ public:
     float dy;
     bool czyZniszczony() const;
     int liczbaTrafien;
+    int umiera;
+    bool animuj(String& akcja);
+    int i;
 };
 
 struct GraczInfo {
@@ -51,9 +54,10 @@ public:
     Kula(float x, float y, float dx, float dy);
     void przesun();
     FloatRect getBounds();
-    RectangleShape kulaShape;
     bool czyTrafi³a() const;
     void oznacz¿etrafi³a();
+    Texture fireball;
+    Sprite pocisk;
 
 protected:
     bool trafiona;
@@ -69,6 +73,7 @@ public:
     void run();
     void update();
     void init();
+    void zapiszWynikiDoPliku();
     RenderWindow& getWindow();
     void dodajwroga();
     void rysujinterfejs();
@@ -78,22 +83,29 @@ public:
     Texture end;
     Sprite exit;
     Texture wyjscie;
+    Texture lvlup;
+    Sprite lvl;
+    static int g³oœnoœægra;
+    static string nick;
 
 
 protected:
+    void updateWrogowie();
+    void levelup();
     void kolizjeKulaWrog();
     void usunZniszczoneWrogi();
     void usunZnioszczoneKule();
     Font arial;
     Text Tak, Nie;
-    bool mysz(const sf::Text& button);
-    int kill = 0, lv = 0, hp = 100, exp = 10;
+    bool mysz(const Text& button);
+    int kill = 0, lv = 1, hp = 100, exp = 10, l =1;
     GraczInfo info;
     postac p1;
     int pauza = 1;
     int wyj = 1;
     int endd = 0;
-    float dx, dy, resp =500.f;
+    float dx, dy;
+    double resp = 500.00;
     RenderWindow window;
     Music muzyczka;
     Music hit;
@@ -104,6 +116,7 @@ protected:
     Clock zegarkolizji;
     Clock koniec;
     Clock kulet;
+    Clock czas;
     Vector2f pozycja;
     vector<wrog*> wrogowie;
     vector<Kula*> kule;
