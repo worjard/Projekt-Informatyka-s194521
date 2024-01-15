@@ -9,6 +9,97 @@ using namespace sf;
 
 int Menu::g³oœnoœæmenu;
 
+int Menu::wybierzpostac() {
+    int p;
+    Font font;
+    if (!font.loadFromFile("arial.ttf")) {
+        cerr << "B³¹d ³adowania czcionki!" << endl;
+        return 0;
+    }
+
+    Text wybierzpostacc;
+    wybierzpostacc.setFont(font);
+    wybierzpostacc.setString("WYBIERZ SWOJA POSTAC");
+    wybierzpostacc.setCharacterSize(85);
+    wybierzpostacc.setFillColor(Color::White);
+    wybierzpostacc.setPosition(467, 100);
+
+    Text opis1;
+    opis1.setFont(font);
+    opis1.setString("Szybkosc 10\nSzybkosc strzalu: 69\nHp: 80");
+    opis1.setCharacterSize(48);
+    opis1.setFillColor(Color::White);
+    opis1.setPosition(300, 700);
+
+    Text opis2;
+    opis2.setFont(font);
+    opis2.setString("Szybkosc 7\nSzybkosc strzalu: 100\nHp: 100");
+    opis2.setCharacterSize(48);
+    opis2.setFillColor(Color::White);
+    opis2.setPosition(1200, 700);
+
+    // Grafika postaci 1
+    Texture postac1Texture;
+    if (!postac1Texture.loadFromFile("postac1.png")) {
+        cerr << "B³¹d ³adowania tekstury postaci 1!" << endl;
+        return 0;
+    }
+
+    RectangleShape postac1Rect(Vector2f(200, 280)); // Ustaw rozmiar prostok¹ta postaci 1
+    postac1Rect.setTexture(&postac1Texture);
+    postac1Rect.setPosition(300, 400); // Ustaw pozycjê prostok¹ta postaci 1
+
+    // Grafika postaci 2
+    Texture postac2Texture;
+    if (!postac2Texture.loadFromFile("postac2.png")) {
+        cerr << "B³¹d ³adowania tekstury postaci 2!" << endl;
+        return 0;
+    }
+
+    RectangleShape postac2Rect(Vector2f(200, 280)); // Ustaw rozmiar prostok¹ta postaci 2
+    postac2Rect.setTexture(&postac2Texture);
+    postac2Rect.setPosition(1200, 400); // Ustaw pozycjê prostok¹ta postaci 2
+
+    window.clear();
+    window.draw(tloS);
+    window.draw(wybierzpostacc);
+    window.draw(postac1Rect);
+    window.draw(postac2Rect);
+    window.draw(opis1);
+    window.draw(opis2);
+    window.draw(przyciskWroc);
+    window.display();
+
+    Event event;
+    while (window.isOpen()) {
+        while (window.pollEvent(event)) {
+            if (event.type == Event::Closed) {
+                window.close();
+            }
+                 if (Mouse::isButtonPressed(Mouse::Left)) {
+                      if (mysz2(postac1Rect)) {
+                         p = 1;
+                         return p;
+                      }
+
+                      if (mysz2(postac2Rect)) {
+                          p = 2;
+                          return p;
+                      }
+                      if (mysz(przyciskWroc)) {
+                          return 0;
+                      }
+                 }
+        }
+
+
+     }
+
+        
+ 
+    return 0; 
+}
+
 void Menu::ustawTlo(const std::string& sciezkaDoObrazka) {
     if (!tloT.loadFromFile(sciezkaDoObrazka)) {
         cerr << "B³¹d ³adowania obrazka t³a!" << endl;
@@ -114,7 +205,7 @@ void Menu::wyswietlWynikiTabelka() {
     if (plik.is_open()) {
         // Wczytaj wyniki z pliku i wyœwietl je w formie tabeli
         std::string linia;
-        int yPos = 300; // Pocz¹tkowa pozycja Y dla tekstu
+        int yPos = 200; // Pocz¹tkowa pozycja Y dla tekstu
         int fontSize = 64; // Rozmiar czcionki
 
         // Nag³ówki tabeli
@@ -122,10 +213,10 @@ void Menu::wyswietlWynikiTabelka() {
         Font font;
         if (font.loadFromFile("arial.ttf")) {
             naglowek.setFont(font);
-            naglowek.setCharacterSize(fontSize);
+            naglowek.setCharacterSize(100);
             naglowek.setFillColor(sf::Color::White);
-            naglowek.setString("Nick\tKill\tLVL\n\n");
-            naglowek.setPosition(500, yPos);
+            naglowek.setString("WYNIKI POPRZEDNICH GRACZY");
+            naglowek.setPosition(200, 50);
             yPos += fontSize;
             window.draw(naglowek);
         }
@@ -136,7 +227,7 @@ void Menu::wyswietlWynikiTabelka() {
             wynik.setCharacterSize(fontSize);
             wynik.setFillColor(sf::Color::White);
             wynik.setString(linia);
-            wynik.setPosition(500, yPos);
+            wynik.setPosition(300, yPos);
             yPos += fontSize;
             window.draw(wynik);
         }
@@ -263,10 +354,13 @@ void Menu::init() {
                     if (mysz(przyciskGraj)) {
                         Gra::nick = getNickname();
                         if (Gra::nick != "") {
-                            window.close();
-                            muzyczkamenu.stop();
-                            Gra gra;
-                            gra.run();
+                            Gra::postaccc = wybierzpostac();
+                            if (Gra::postaccc == 1 || Gra::postaccc == 2) {
+                                window.close();
+                                muzyczkamenu.stop();
+                                Gra gra;
+                                gra.run();
+                            }
 
                         }
                         cout << "Klikniêto przycisk GRAJ!" << endl;
@@ -362,6 +456,12 @@ void Menu::run() {
 }
 
 bool Menu::mysz(const Text& button) {
+    Vector2i mousePosition = Mouse::getPosition(window);
+    FloatRect buttonBounds = button.getGlobalBounds();
+
+    return buttonBounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
+}
+bool Menu::mysz2(const RectangleShape& button) {
     Vector2i mousePosition = Mouse::getPosition(window);
     FloatRect buttonBounds = button.getGlobalBounds();
 

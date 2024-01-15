@@ -13,6 +13,7 @@ protected:
     Vector2f position;
     Sprite bohater;
     Texture chodzenie;
+    Texture chodzenie2;
     Texture œmieræ;
     int animFrame;
     Clock animClock;
@@ -34,13 +35,17 @@ class wrog : public postac {
 public:
     wrog(float x_in, float y_in);
     Clock zegar; 
+    Clock œmierc;
+    Clock chodz;
     float dx;     
     float dy;
     bool czyZniszczony() const;
     int liczbaTrafien;
-    int umiera;
-    bool animuj(String& akcja);
-    int i;
+    bool umiera;
+    bool chodzi;
+    void animuj(int i);
+
+
 };
 
 struct GraczInfo {
@@ -86,10 +91,15 @@ public:
     Texture lvlup;
     Sprite lvl;
     static int g³oœnoœægra;
+    static int postaccc;
     static string nick;
-
-
+    static vector<wrog*> wrogowie;
+    static int hp;
+    int szybkosc;
+    int szybkoscstrzal;
 protected:
+
+    vector<Kula*> kule;
     void updateWrogowie();
     void levelup();
     void kolizjeKulaWrog();
@@ -98,12 +108,13 @@ protected:
     Font arial;
     Text Tak, Nie;
     bool mysz(const Text& button);
-    int kill = 0, lv = 1, hp = 100, exp = 10, l =1;
+    int kill = 0, lv = 1, exp = 10, l =1;
     GraczInfo info;
     postac p1;
     int pauza = 1;
     int wyj = 1;
     int endd = 0;
+    int lvll = 1;
     float dx, dy;
     double resp = 500.00;
     RenderWindow window;
@@ -114,12 +125,12 @@ protected:
     Sprite backgroundSprites[6];
     Clock zegarwroga;
     Clock zegarkolizji;
+    Clock zegarlvl;
     Clock koniec;
     Clock kulet;
     Clock czas;
     Vector2f pozycja;
-    vector<wrog*> wrogowie;
-    vector<Kula*> kule;
+
 };
 
 

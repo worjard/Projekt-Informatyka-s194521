@@ -1,46 +1,44 @@
-﻿  Menu.cpp
-C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Menu.cpp(19,77): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
+﻿  Gra.cpp
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(221,48): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
           with
           [
               T=unsigned int
           ]
-C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Menu.cpp(19,38): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(224,92): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
           with
           [
               T=unsigned int
           ]
-C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Menu.cpp(128,39): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Menu.cpp(139,36): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Menu.cpp(237,28): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Menu.cpp(245,32): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Menu.cpp(310,39): warning C4305: "argument": obcięcie z "double" do "float"
-C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Menu.cpp(317,39): warning C4305: "argument": obcięcie z "double" do "float"
-C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Menu.cpp(325,39): warning C4305: "argument": obcięcie z "double" do "float"
-C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Menu.cpp(333,39): warning C4305: "argument": obcięcie z "double" do "float"
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\xstring(2728,53): warning C4244: "argument": konwersja z "wchar_t" do "const _Elem", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(224,54): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
           with
           [
-              _Elem=char
+              T=unsigned int
           ]
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\xstring(2584,17): message : zobacz odwołanie do kompilowanego tworzenia wystąpienia „void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct_from_iter<wchar_t*,wchar_t*,_Size_type>(_Iter,const _Sent,_Size)” funkcji szablon
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(237,24): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(239,19): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(247,42): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(247,34): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(277,33): warning C4244: "inicjowanie": konwersja z "T" do "int", możliwa utrata danych
           with
           [
-              _Size_type=unsigned __int64,
-              _Iter=wchar_t *,
-              _Sent=wchar_t *,
-              _Size=unsigned __int64
+              T=float
           ]
-C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Menu.cpp(79,43): message : zobacz odwołanie do kompilowanego tworzenia wystąpienia „std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)” funkcji szablon
-          with
-          [
-              _Elem=wchar_t,
-              _Iter=std::_String_iterator<std::_String_val<std::_Simple_types<wchar_t>>>,
-              _Alloc=std::allocator<char>
-          ]
-C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Menu.cpp(79,35): message : zobacz pierwsze odwołanie do elementu „std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string” w „Menu::getNickname”
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(389,43): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(389,32): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(392,42): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(392,32): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(395,43): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(395,32): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(398,42): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(398,32): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(402,39): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(405,36): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(408,39): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(411,36): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\worjard\Documents\Projektinformatykagra\Projekt informatyka gra\Gra.cpp(438,35): warning C4804: ">": niebezpieczne użycie typu "bool" w operacji
   Trwa generowanie kodu
-  1 of 541 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+  1 of 548 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+    2 functions had inline decision re-evaluated but remain unchanged
   Zakończono generowanie kodu
   Projekt informatyka gra.vcxproj -> C:\Users\worjard\Documents\Projektinformatykagra\x64\Release\Projekt informatyka gra.exe

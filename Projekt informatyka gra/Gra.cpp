@@ -8,16 +8,20 @@
 #include <random>
 #include <vector>
 
-
 using namespace std;
 using namespace sf;
 
 int Gra::g³oœnoœægra = 50;
+int Gra::postaccc;
+int Gra:: hp;
 string Gra::nick;
+vector<wrog*> Gra::wrogowie;
+
 wrog::wrog(float x_in, float y_in) : liczbaTrafien(0) {
     position.x = x_in;
     position.y = y_in;
     chodzenie.loadFromFile("chodzenie.png");
+    chodzenie2.loadFromFile("chodzenie2.png");
     œmieræ.loadFromFile("œmieræ.png");
     bohater.setTexture(chodzenie);
     bohater.setTextureRect(IntRect(0, 0, 73, 110));
@@ -26,13 +30,21 @@ wrog::wrog(float x_in, float y_in) : liczbaTrafien(0) {
     animClock.restart();
     col = 0;
     row = 2;
-    umiera = 0;
+    umiera = false;
+    chodzi = true;
+
 }
 
 postac::postac(float x_in, float y_in) {
     position.x = x_in;
     position.y = y_in;
-    chodzenie.loadFromFile("wojownik1.png");
+    if (Gra::postaccc == 1) {
+        chodzenie.loadFromFile("wojownik1.png");
+    }
+    if (Gra::postaccc == 2) {
+        chodzenie.loadFromFile("wojownik2.png");
+
+    }
     bohater.setTexture(chodzenie);
     bohater.setTextureRect(IntRect(0, 0, 66, 110));
     bohater.setPosition(position);
@@ -42,13 +54,14 @@ postac::postac(float x_in, float y_in) {
     row = 0;
 
 }
+
 bool wrog::czyZniszczony() const {
     return liczbaTrafien >= 2;  // Zniszcz wroga, jeœli zosta³ trafiony dwukrotnie
 }
+
 postac::postac() : animFrame(0), col(0), row(0) {
 
 }
-
 
 void postac::przesun(float x_in, float y_in)
 {
@@ -90,32 +103,45 @@ void postac::animujChodzenie(int kierunek)
     }
 }
 
-bool wrog::animuj(String& akcja)
-{
-    if (akcja == "œmieræ") {
-        bohater.setTexture(œmieræ);
-        if (animClock.getElapsedTime().asMilliseconds() > 100.0f) {
+void wrog::animuj(int i) {
+    if (umiera) {
+        if (œmierc.getElapsedTime().asMilliseconds() > 100.0f) {
+            bohater.setTexture(œmieræ);
             bohater.setTextureRect(IntRect(col * 113, 0, 113, 110));
-            col++;
-            if (col > 15) {
-                return true;
-                col = 0;
+            if (15 > col) {
+                col++;
             }
-            animClock.restart();
+            if (col == 15) {
+                umiera = false;
+            }
+            œmierc.restart();
         }
     }
-  
-    else if (akcja == "chodzenie") {
-        bohater.setTexture(chodzenie);
-        if (animClock.getElapsedTime().asMilliseconds() > 100.0f) {
-            bohater.setTextureRect(IntRect(col * 73, 0, 73, 110));
-            col++;
-            if (col >= 13) {
-                col = 0;
+    if (chodzi) {
+        if (i == 1) {
+            bohater.setTexture(chodzenie);
+            if (chodz.getElapsedTime().asMilliseconds() > 100.0f) {
+                bohater.setTextureRect(IntRect(col * 73, 0, 70, 110));
+                col++;
+                if (col >= 13) {
+                    col = 0;
+                }
+                chodz.restart();
             }
-            animClock.restart();
+        }
+        if (i == 2) {
+            bohater.setTexture(chodzenie2);
+            if (chodz.getElapsedTime().asMilliseconds() > 100.0f) {
+                bohater.setTextureRect(IntRect(col * 67, 0, 65, 110));
+                col--;
+                if ( 1 >= col  ) {
+                    col = 12;
+                }
+                chodz.restart();
+            }
         }
     }
+
 }
 Kula::Kula(float x, float y, float dx, float dy) : position(x, y), velocity(dx, dy), trafiona(false) {
     fireball.loadFromFile("fire-ball.png");
@@ -131,6 +157,7 @@ void Kula::przesun() {
 FloatRect Kula::getBounds(){
     return pocisk.getGlobalBounds(); // Pobierz prostok¹t kolizji kuli
 }
+
 bool Kula::czyTrafi³a() const {
     return trafiona;
 }
@@ -149,8 +176,17 @@ Gra::Gra() : p1(2000, 600), window(VideoMode(1920, 1080), "Lawa")
 }
 
 void Gra::init()
-{ 
-
+{
+    if (Gra::postaccc == 1) {
+        hp = 80;
+        szybkosc = 10;
+        szybkoscstrzal = 17;
+    }
+    if (Gra::postaccc == 2) {
+        hp = 100;
+        szybkosc = 7;
+        szybkoscstrzal = 20;
+    }
     Tak.setFont(arial);
     Tak.setString("Tak");
     Tak.setCharacterSize(32);
@@ -172,7 +208,7 @@ void Gra::init()
     exit.setTextureRect(IntRect(0, 0, 369, 128));
 
     lvlup.loadFromFile("lvlup.jpg");
-    lvl.setTexture(wyjscie);
+    lvl.setTexture(lvlup);
     lvl.setTextureRect(IntRect(0, 0, 634, 853));
 
     for (int i = 0; i < 6; i++) {
@@ -202,6 +238,7 @@ void Gra::init()
     hit.setLoop(false);
     hit.setVolume(g³oœnoœægra);
 }
+
 void Gra::dodajwroga() {
     random_device rd;
     mt19937 gen(rd());
@@ -209,6 +246,7 @@ void Gra::dodajwroga() {
     uniform_int_distribution<int> y(0, 5710);
     wrogowie.push_back(new wrog(x(gen), y(gen)));
 }
+
 void Gra::kolizjeKulaWrog() {
     for (auto& w : wrogowie) {
         for (auto& kula : kule) {
@@ -222,52 +260,67 @@ void Gra::kolizjeKulaWrog() {
         }
     }
 }
+
 void Gra::updateWrogowie() {
     for (auto& w1 : wrogowie) {
         for (auto& w2 : wrogowie) {
-            if (w1 != w2 && !w1->czyZniszczony() && !w2->czyZniszczony()) {
-                FloatRect boundingW1 = w1->getBounds();
-                FloatRect boundingW2 = w2->getBounds();
-                if (boundingW1.intersects(boundingW2)) {
-                    Vector2f collisionVector = w1->getPosition() - w2->getPosition();
-                    float length = sqrt(collisionVector.x * collisionVector.x + collisionVector.y * collisionVector.y);
-                    collisionVector /= length;
-                    w1->przesun(collisionVector.x * 5, collisionVector.y * 5);
-                    w2->przesun(-collisionVector.x * 5, -collisionVector.y * 5);
+            if (!w1->umiera && !w2->umiera) {
+                if (w1 != w2 && !w1->czyZniszczony() && !w2->czyZniszczony()) {
+                    FloatRect boundingW1 = w1->getBounds();
+                    FloatRect boundingW2 = w2->getBounds();
+                    if (boundingW1.intersects(boundingW2)) {
+                        w1->chodzi = true;
+                        w2->chodzi = true;
+                        Vector2f collisionVector = w1->getPosition() - w2->getPosition();
+                        float length = sqrt(collisionVector.x * collisionVector.x + collisionVector.y * collisionVector.y);
+                        collisionVector /= length;
+                        int dx1 = collisionVector.x * 5;
+                        w1->przesun(collisionVector.x * 5, collisionVector.y * 5);
+                        w2->przesun(-collisionVector.x * 5, -collisionVector.y * 5);
+                    }
                 }
             }
         }
     }
 }
+
 void Gra::usunZniszczoneWrogi() {
     wrogowie.erase(remove_if(wrogowie.begin(), wrogowie.end(), [this](wrog* w) {
         String smierc = "œmieræ";
         bool czyZniszczony = w->czyZniszczony();
         if (czyZniszczony) {
-            w->umiera = 1;
-          if(  w->animuj(smierc)== true){
+            w->umiera = true;
+            w->chodzi = false;
+            w->animuj(1);
+               if(!w->umiera){
                 this->kill++;
                 this->hit.play();
                 delete w;
                 return true;
-          }
+               }
         }
         return false;
         }), wrogowie.end());
     wrogowie.shrink_to_fit();
 }
+
 void Gra::usunZnioszczoneKule() {
     kule.erase(std::remove_if(kule.begin(), kule.end(), [this](Kula* kula) {
         return kula->czyTrafi³a();
         }), kule.end());
     kule.shrink_to_fit();
 }
+
 void Gra::levelup(){
     if (kill >= exp) {
+        zegarlvl.restart();
         lv++;
         exp = 2 * exp + 2;
-        window.draw(lvl);
-        window.display();
+        hp = 110;
+        szybkosc++;
+        if(szybkoscstrzal>0)
+        szybkoscstrzal--;
+        lvll = -lvll;
     }
 }
 
@@ -275,9 +328,9 @@ void Gra::zapiszWynikiDoPliku() {
     ofstream plik("wyniki.txt", ios::app);
 
     if (plik.is_open()) {
-        plik << Gra::nick << "\t";
-        plik << kill << "\t";
-        plik << lv << "\n\n";
+        plik <<"NICK: " << Gra::nick << "\t";
+        plik <<"Liczba Killi: " << kill << "\t";
+        plik <<"POZIOM:" << lv << "\n\n";
         plik.close();
         cout << "Wyniki zapisano do pliku wyniki.txt\n";
     }
@@ -285,6 +338,7 @@ void Gra::zapiszWynikiDoPliku() {
         cerr << "B³¹d otwarcia pliku wyniki.txt!\n";
     }
 }
+
 void Gra::update()
 {
     kolizjeKulaWrog();
@@ -317,7 +371,7 @@ void Gra::update()
                 cout << "wcisnieto esc\n";
             }
         }
-        if (pauza == 1 && wyj == 1 && endd == 0) {
+        if (lvll ==1 && pauza == 1 && wyj == 1 && endd == 0) {
             if (event.type == Event::KeyPressed) {
                 if (event.key.code == Keyboard::W) {
                     p1.animujChodzenie(1);
@@ -332,34 +386,34 @@ void Gra::update()
                     p1.animujChodzenie(2);
                 }
                 if (Keyboard::isKeyPressed(Keyboard::W) && Keyboard::isKeyPressed(Keyboard::A)) {
-                    p1.przesun(-10, -10);
+                    p1.przesun(-szybkosc, -szybkosc);
                 }
                 else if (Keyboard::isKeyPressed(Keyboard::W) && Keyboard::isKeyPressed(Keyboard::D)) {
-                    p1.przesun(10, -10);
+                    p1.przesun(szybkosc, -szybkosc);
                 }
                 else if (Keyboard::isKeyPressed(Keyboard::S) && Keyboard::isKeyPressed(Keyboard::A)) {
-                    p1.przesun(-10, 10);
+                    p1.przesun(-szybkosc, szybkosc);
                 }
                 else if (Keyboard::isKeyPressed(Keyboard::S) && Keyboard::isKeyPressed(Keyboard::D)) {
-                    p1.przesun(10, 10);
+                    p1.przesun(szybkosc, szybkosc);
                 }
                 else {
                     if (event.key.code == Keyboard::W) {
-                        p1.przesun(0, -10);
+                        p1.przesun(0, -szybkosc);
                     }
                     else if (event.key.code == Keyboard::A) {
-                        p1.przesun(-10, 0);
+                        p1.przesun(-szybkosc, 0);
                     }
                     else if (event.key.code == Keyboard::S) {
-                        p1.przesun(0, 10);
+                        p1.przesun(0, szybkosc);
                     }
                     else if (event.key.code == Keyboard::D) {
-                        p1.przesun(10, 0);
+                        p1.przesun(szybkosc, 0);
                     }
                 }
                 prostokatPomocy.setPosition(view.getCenter().x - 500, view.getCenter().y - 450);
                 przegryw.setPosition(view.getCenter().x - 500, view.getCenter().y - 475);
-                lvl.setPosition(view.getCenter().x - 500, view.getCenter().y - 450);
+                lvl.setPosition(view.getCenter().x - 300, view.getCenter().y - 450);
                 exit.setPosition(view.getCenter().x - 150, view.getCenter().y - 175);
                 Tak.setPosition(view.getCenter().x - 78, view.getCenter().y - 95);
                 Nie.setPosition(view.getCenter().x + 95, view.getCenter().y - 95);
@@ -375,36 +429,46 @@ void Gra::update()
         }
     }
 
-    if (pauza == 1 && wyj == 1 && endd == 0) {
+    if (lvll == 1 && pauza == 1 && wyj == 1 && endd == 0) {
                 // Ruch wrogów
                 for (auto& w : wrogowie) {
-                    if (w->umiera == 0) {
-                        String chodzenie = "chodzenie";
+                    if (w->umiera == false) {
                         if (w->zegar.getElapsedTime().asMilliseconds() > 50.0f) {
-                            if (w->getPosition().x > p1.getPosition().x) {
-                                w->dx = -2;
-                                w->animuj(chodzenie);
+                            w->chodzi = true;
+                            if (5 > w->getPosition().x - p1.getPosition().x > -5 ) {
+                                w->animuj(1);
+                                w->dx = 0;
                             }
-                            else {
+
+                            if (w->getPosition().x - p1.getPosition().x > 5) {
+                                w->dx = -2;
+                            }
+                            if (-5 > w->getPosition().x - p1.getPosition().x ) {
                                 w->dx = 2;
-                                w->animuj(chodzenie);
                             }
                             if (w->getPosition().y > p1.getPosition().y) {
                                 w->dy = -2;
-                                w->animuj(chodzenie);
                             }
                             else {
                                 w->dy = 2;
-                                w->animuj(chodzenie);
                             }
+                            if (w->dx > 0) {
+                                    w->animuj(1);
+
+                            }
+                            if(0 > w->dx) {
+                                    w->animuj(2);
+                            }
+
                             w->przesun(w->dx, w->dy);
                             w->zegar.restart();
                         }
                     }
+                    w->chodzi = false;
                 }
                 if (Mouse::isButtonPressed(Mouse::Left)) {
                     // Pobierz pozycjê myszy wzglêdem widoku (view)
-                    if (kulet.getElapsedTime().asMilliseconds() > 20.0f) {
+                    if (kulet.getElapsedTime().asMilliseconds() > szybkoscstrzal) {
                     Vector2i mousePosition = Mouse::getPosition(window);
                     Vector2f worldMousePosition = window.mapPixelToCoords(mousePosition, view);
 
@@ -522,6 +586,12 @@ void Gra::run()
             window.draw(exit);
             window.draw(Tak);
             window.draw(Nie);
+        }
+        if (lvll == -1) {
+            window.draw(lvl);
+            if (zegarlvl.getElapsedTime().asMilliseconds() > 3000.0f) {
+                lvll = -lvll;
+            }
         }
         window.display();
     }

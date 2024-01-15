@@ -12,6 +12,7 @@ public:
     Menu(RenderWindow& window);
     void run();
     string getNickname();
+    int wybierzpostac();
 private:
     void wyswietlWynikiTabelka();
     Text Tytu³, przyciskGraj, przyciskWyniki, przyciskOpcje, przyciskWyjscie, przyciskWroc, przyciskG³os, przyciskG³os2, przyciskzmniejsz, przyciskzmniejsz2, przyciskzwieksz, przyciskzwieksz2, przyciskZatwierdz;
@@ -19,6 +20,7 @@ private:
     Music muzyczkamenu;
     RenderWindow& window;
     bool mysz(const sf::Text& button);
+    bool mysz2(const sf::RectangleShape& button);
     void init();
     void ustawTlo(const std::string& sciezkaDoObrazka);  
     Texture tloT;

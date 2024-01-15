@@ -1,4 +1,10 @@
-dupa	27	3
+NICK: WORJARD	Liczba Killi: 11	POZIOM:2
 
-Worjard	53	4
+NICK: WORJARD	Liczba Killi: 36	POZIOM:3
+
+NICK: ALA	Liczba Killi: 11	POZIOM:2
+
+NICK: JAJA	Liczba Killi: 12	POZIOM:2
+
+NICK: DUPA	Liczba Killi: 12	POZIOM:2
 
