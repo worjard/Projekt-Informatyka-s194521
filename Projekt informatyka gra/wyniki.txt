@@ -8,3 +8,5 @@ NICK: JAJA	Liczba Killi: 12	POZIOM:2
 
 NICK: DUPA	Liczba Killi: 12	POZIOM:2
 
+NICK: DZULINKA	Liczba Killi: 100	POZIOM:5
+
